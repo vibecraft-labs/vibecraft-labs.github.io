@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeCraft Labs — The Experiment Room</title>
+<meta name="description" content="VibeCraft Labs is the experiment room of VibeCraft — prototypes, wild ideas and open experiments brewed before they become products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070310; --card:rgba(255,255,255,.04);
+  --line:rgba(255,255,255,.10);
+  --txt:#f0eaf8; --dim:#a89ec2;
+  --green:#4ade80; --acid:#a3e635; --violet:#a78bfa;
+  --grad:linear-gradient(90deg,var(--acid),var(--green) 40%,var(--violet));
+  --grad2:linear-gradient(135deg,var(--green),var(--acid));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);
+  font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+::selection{background:rgba(163,230,53,.35)}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* backdrop */
+.backdrop{position:fixed;inset:0;z-index:-3;background:
+  radial-gradient(ellipse 70% 50% at 15% -10%,rgba(74,222,128,.16),transparent),
+  radial-gradient(ellipse 60% 40% at 90% 10%,rgba(163,230,53,.10),transparent),
+  radial-gradient(ellipse 70% 50% at 50% 115%,rgba(167,139,250,.14),transparent),
+  var(--bg)}
+#stars{position:fixed;inset:0;z-index:-2}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  justify-content:space-between;padding:18px clamp(20px,6vw,72px);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(7,3,16,.55);border-bottom:1px solid var(--line)}
+.logo{font-weight:700;font-size:1.25rem;letter-spacing:.04em;text-decoration:none;color:var(--txt)}
+.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav .links{display:flex;gap:26px;align-items:center}
+nav .links a{color:var(--dim);text-decoration:none;font-size:.92rem;transition:color .2s}
+nav .links a:hover{color:var(--txt)}
+nav .links a.cta{color:#0a1403;background:var(--grad2);padding:9px 20px;border-radius:99px;font-weight:600}
+nav .links a.cta:hover{filter:brightness(1.12)}
+@media(max-width:760px){nav .links a:not(.cta){display:none}}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:150px clamp(20px,6vw,72px) 80px;position:relative}
+.pill{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;color:var(--dim);
+  border:1px solid var(--line);border-radius:99px;padding:7px 16px;width:fit-content;
+  background:rgba(255,255,255,.03)}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--acid);
+  box-shadow:0 0 10px var(--acid);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-size:clamp(2.6rem,7.5vw,5.4rem);line-height:1.05;font-weight:700;
+  letter-spacing:-.02em;margin:26px 0 14px;max-width:1050px}
+.hero h1 .grad{background:var(--grad);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shift 6s linear infinite}
+@keyframes shift{to{background-position:200% 0}}
+.hero .typed{font-family:'JetBrains Mono',monospace;color:var(--acid);
+  font-size:clamp(.95rem,2.2vw,1.25rem);min-height:1.8em}
+.hero .typed .cursor{display:inline-block;width:9px;background:var(--acid);
+  animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.sub{color:var(--dim);max-width:640px;margin:22px 0 40px;font-size:1.08rem}
+.btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{padding:15px 32px;border-radius:14px;text-decoration:none;font-weight:600;
+  font-size:1rem;transition:transform .2s,box-shadow .2s,filter .2s;display:inline-block}
+.btn.primary{background:var(--grad2);color:#0a1403;box-shadow:0 0 30px rgba(163,230,53,.22)}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 8px 44px rgba(74,222,128,.35)}
+.btn.ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.02)}
+.btn.ghost:hover{border-color:var(--green);transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(74,222,128,.18)}
+
+/* ticker */
+.ticker-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;padding:13px 0;background:rgba(163,230,53,.03)}
+.ticker{display:flex;gap:64px;white-space:nowrap;width:max-content;
+  animation:scroll 28s linear infinite;font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;color:var(--acid)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.ticker b{color:var(--txt);font-weight:600}
+
+/* sections */
+section{padding:110px clamp(20px,6vw,72px)}
+.sec-label{font-family:'JetBrains Mono',monospace;color:var(--acid);
+  font-size:.8rem;letter-spacing:.22em;text-transform:uppercase}
+h2{font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.02em;margin:14px 0 12px}
+.section-sub{color:var(--dim);max-width:640px;margin-bottom:52px}
+
+/* experiments */
+.exps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.exp{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+  position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.exp:hover{transform:translateY(-6px);border-color:rgba(163,230,53,.5);
+  box-shadow:0 18px 50px rgba(74,222,128,.10)}
+.exp .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  font-size:1.5rem;margin-bottom:18px;background:rgba(163,230,53,.07);
+  border:1px solid rgba(163,230,53,.25)}
+.exp h3{font-size:1.12rem;margin-bottom:8px}
+.exp p{color:var(--dim);font-size:.93rem}
+.status{display:inline-flex;align-items:center;gap:7px;margin-top:18px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;
+  padding:5px 12px;border-radius:99px;border:1px solid var(--line)}
+.status i{width:7px;height:7px;border-radius:50%;font-style:normal}
+.status.brewing{color:var(--acid);border-color:rgba(163,230,53,.4)}
+.status.brewing i{background:var(--acid);animation:pulse 1.6s infinite}
+.status.live{color:var(--green);border-color:rgba(74,222,128,.4)}
+.status.live i{background:var(--green)}
+.status.idea{color:var(--dim)}
+.status.idea i{background:var(--dim)}
+
+/* mission */
+.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.mission{border:1px dashed rgba(163,230,53,.35);border-radius:20px;padding:30px 28px;
+  background:rgba(163,230,53,.03);transition:transform .3s,border-color .3s}
+.mission:hover{transform:translateY(-5px);border-style:solid;border-color:rgba(163,230,53,.7)}
+.mission .ico{font-size:1.6rem}
+.mission h3{font-size:1.08rem;margin:12px 0 8px}
+.mission p{color:var(--dim);font-size:.92rem}
+
+/* band */
+.band{border:1px solid rgba(163,230,53,.3);border-radius:28px;
+  padding:clamp(44px,7vw,80px);text-align:center;
+  background:linear-gradient(145deg,rgba(163,230,53,.06),rgba(74,222,128,.05),rgba(167,139,250,.07))}
+.band p{color:var(--dim);max-width:520px;margin:14px auto 36px}
+.band .btns{justify-content:center}
+
+footer{padding:56px clamp(20px,6vw,72px) 44px;display:flex;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:110px;
+  color:var(--dim);font-size:.88rem}
+footer a{color:var(--dim);text-decoration:none}
+footer a:hover{color:var(--acid)}
+footer .f-links{display:flex;gap:24px}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:640px){section{padding:80px 24px}}
+</style>
+</head>
+<body>
+<div class="backdrop"></div>
+<canvas id="stars"></canvas>
+
+<nav>
+  <a class="logo" href="#">VIBECRAFT<b>LABS</b> 🧪</a>
+  <div class="links">
+    <a href="#experiments">Experiments</a>
+    <a href="#mission">Mission</a>
+    <a href="#join">Join</a>
+    <a href="https://vibecraft-io.github.io" class="cta">VibeCraft IO ↗</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="pill"><span class="dot"></span> status: always brewing</div>
+  <h1>The experiment room of<br><span class="grad">VibeCraft.</span></h1>
+  <div class="typed"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
+  <p class="sub">VibeCraft Labs is where ideas ferment before they become products.
+     Prototypes, proofs of concept and open experiments — some will fail loudly,
+     a few will ship quietly through <a href="https://vibecraft-io.github.io"
+     style="color:var(--green)">VibeCraft IO</a>, our company.</p>
+  <div class="btns">
+    <a class="btn primary" href="#experiments">Peek at experiments ↓</a>
+    <a class="btn ghost" href="https://vibecraft-io.github.io">🏢 VibeCraft IO — the company</a>
+  </div>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <span>SYS.BOOT … <b>OK</b></span>
+    <span>REACTOR <b>STABLE</b></span>
+    <span>EXPERIMENTS ACTIVE <b>07</b></span>
+    <span>CAFFEINE <b>97%</b></span>
+    <span>REALITY_MARGIN <b>OPTIONAL</b></span>
+    <span>MOOD <b>CURIOUS</b></span>
+    <span>VIBES <b>IMMACULATE</b></span>
+  </div>
+</div>
+
+<section id="experiments">
+  <div class="sec-label reveal">// experiments</div>
+  <h2 class="reveal">Currently in the tank.</h2>
+  <p class="section-sub reveal">Nothing here is a promise. Everything here is a question we're actively asking.</p>
+  <div class="exps">
+    <div class="exp reveal"><div class="ico">🤖</div><h3>Agent Playground</h3>
+      <p>Sandbox where autonomous AI agents browse, click and reason. Watch them fumble, learn and occasionally achieve greatness.</p>
+      <span class="status brewing"><i></i>BREWING</span></div>
+    <div class="exp reveal"><div class="ico">🎮</div><h3>Neural Arcade</h3>
+      <p>Classic games rebuilt while neural nets play themselves — and quietly reinvent the strategy guide.</p>
+      <span class="status brewing"><i></i>BREWING</span></div>
+    <div class="exp reveal"><div class="ico">📡</div><h3>Homelab Mesh</h3>
+      <p>Self-hosted everything: home automation, observability and a Raspberry Pi cluster that hums in the corner.</p>
+      <span class="status live"><i></i>LIVE</span></div>
+    <div class="exp reveal"><div class="ico">📊</div><h3>Data Vibe-ualization</h3>
+      <p>Turning dull datasets into visuals people actually stare at. Charts with choreography.</p>
+      <span class="status idea"><i></i>IDEA</span></div>
+    <div class="exp reveal"><div class="ico">🦀</div><h3>Rust Micro-services</h3>
+      <p>Tiny, fast, unreasonably safe backend services. Because sometimes Go needs a rival.</p>
+      <span class="status brewing"><i></i>BREWING</span></div>
+    <div class="exp reveal"><div class="ico">🧬</div><h3>Generative UI</h3>
+      <p>Interfaces that assemble themselves from intent. Describe it, and the UI brews itself.</p>
+      <span class="status idea"><i></i>IDEA</span></div>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="sec-label reveal">// mission</div>
+  <h2 class="reveal">Brew first, productize later.</h2>
+  <p class="section-sub reveal">The lab exists so the company never stops learning.</p>
+  <div class="missions">
+    <div class="mission reveal"><div class="ico">🌱</div><h3>Explore fearlessly</h3>
+      <p>Experiments are cheap; assumptions are expensive. We test the weird ideas here, away from production.</p></div>
+    <div class="mission reveal"><div class="ico">🔗</div><h3>Open by default</h3>
+      <p>Code, findings and post-mortems get published. Failed experiments teach loudest — we share those too.</p></div>
+    <div class="mission reveal"><div class="ico">🚀</div><h3>Graduate the winners</h3>
+      <p>What survives the lab graduates to <a href="https://vibecraft-io.github.io" style="color:var(--green)">VibeCraft IO</a> and becomes real product work.</p></div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="band reveal">
+    <div class="sec-label">// join the lab</div>
+    <h2>Have a wild idea?</h2>
+    <p>Every experiment starts as a message like yours. Pitch it — worst case we learn something.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:lab@vibecraft.io">lab@vibecraft.io</a>
+      <a class="btn ghost" href="https://github.com/vibecraft-labs">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 VibeCraft Labs — the experiment room of VibeCraft</div>
+  <div class="f-links">
+    <a href="https://vibecraft-io.github.io">VibeCraft IO — the company</a>
+    <a href="https://github.com/vibecraft-labs">GitHub</a>
+  </div>
+</footer>
+
+<script>
+/* typing */
+const lines=[
+  "prototypes · proofs of concept · open experiments",
+  "where products are brewed before they exist",
+  "the experiment room of VibeCraft IO"];
+let li=0,ci=0,del=false;const t=document.getElementById('typed');
+(function tick(){
+  const s=lines[li];
+  t.textContent=s.slice(0,ci);
+  if(!del&&ci<s.length){ci++;setTimeout(tick,42);}
+  else if(!del){del=true;setTimeout(tick,2200);}
+  else if(ci>0){ci--;setTimeout(tick,18);}
+  else{del=false;li=(li+1)%lines.length;setTimeout(tick,350);}
+})();
+
+/* starfield */
+const c=document.getElementById('stars'),x=c.getContext('2d');let W,H,ps=[];
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight;
+  ps=Array.from({length:Math.min(120,W/12)},()=>({
+    x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,
+    vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,
+    h:Math.random()<.6?80:(Math.random()<.5?262:150)}));}
+rs();addEventListener('resize',rs);
+(function draw(){
+  x.clearRect(0,0,W,H);
+  for(const p of ps){p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    x.beginPath();x.arc(p.x,p.y,p.r,0,7);
+    x.fillStyle=`hsla(${p.h},85%,68%,.5)`;x.fill();}
+  requestAnimationFrame(draw);
+})();
+
+/* ticker: duplicate content for seamless loop */
+const tk=document.getElementById('ticker');
+tk.innerHTML+=tk.innerHTML;
+
+/* reveal on scroll */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
