@@ -3,148 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VibeCraft Labs — The Experiment Room</title>
-<meta name="description" content="VibeCraft Labs is the experiment room of VibeCraft — prototypes, wild ideas and open experiments brewed before they become products.">
+<title>VibeCraft Labs — Pixel Experiment Room</title>
+<meta name="description" content="VibeCraft Labs is the pixel experiment room of VibeCraft — prototypes, wild ideas and open experiments, 8-bit style.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070310; --card:rgba(255,255,255,.04);
-  --line:rgba(255,255,255,.10);
-  --txt:#f0eaf8; --dim:#a89ec2;
-  --green:#4ade80; --acid:#a3e635; --violet:#a78bfa;
-  --grad:linear-gradient(90deg,var(--acid),var(--green) 40%,var(--violet));
-  --grad2:linear-gradient(135deg,var(--green),var(--acid));
+  --bg:#12102a; --bg2:#1a1740; --panel:#221e4e;
+  --line:#3d3670;
+  --txt:#e8e5ff; --dim:#9a93c8;
+  --green:#3bf286; --acid:#c8f558; --pink:#ff7edb; --cyan:#5df2ff; --gold:#ffd75e;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);
-  font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
-::selection{background:rgba(163,230,53,.35)}
-.mono{font-family:'JetBrains Mono',monospace}
+  font-family:'VT323',monospace;font-size:20px;line-height:1.5;overflow-x:hidden}
+::selection{background:var(--pink);color:#12102a}
+h1,h2,h3,.px{font-family:'Press Start 2P',monospace;line-height:1.6}
 
-/* backdrop */
-.backdrop{position:fixed;inset:0;z-index:-3;background:
-  radial-gradient(ellipse 70% 50% at 15% -10%,rgba(74,222,128,.16),transparent),
-  radial-gradient(ellipse 60% 40% at 90% 10%,rgba(163,230,53,.10),transparent),
-  radial-gradient(ellipse 70% 50% at 50% 115%,rgba(167,139,250,.14),transparent),
-  var(--bg)}
-#stars{position:fixed;inset:0;z-index:-2}
+/* CRT overlay */
+.scanlines{position:fixed;inset:0;z-index:90;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 2px,transparent 2px 4px)}
+.vignette{position:fixed;inset:0;z-index:91;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5) 100%)}
+.stars{position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1px 1px at 12% 22%,#fff8,transparent),
+    radial-gradient(1px 1px at 34% 8%,#fff6,transparent),
+    radial-gradient(2px 2px at 56% 30%,#fff5,transparent),
+    radial-gradient(1px 1px at 71% 12%,#fff7,transparent),
+    radial-gradient(1px 1px at 88% 25%,#fff6,transparent),
+    radial-gradient(2px 2px at 22% 44%,#fff4,transparent),
+    radial-gradient(1px 1px at 64% 52%,#fff5,transparent),
+    radial-gradient(1px 1px at 44% 70%,#fff5,transparent),
+    radial-gradient(2px 2px at 82% 62%,#fff4,transparent),
+    radial-gradient(1px 1px at 8% 82%,#fff5,transparent),
+    radial-gradient(ellipse 70% 45% at 50% -5%,rgba(93,242,255,.12),transparent),
+    radial-gradient(ellipse 60% 40% at 90% 100%,rgba(255,126,219,.10),transparent),
+    var(--bg)}
+
+/* pixel borders */
+.pbox{background:var(--panel);border:4px solid var(--line);
+  box-shadow:0 0 0 4px var(--bg),0 0 0 8px var(--line),6px 6px 0 8px rgba(0,0,0,.4)}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
-  justify-content:space-between;padding:18px clamp(20px,6vw,72px);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  background:rgba(7,3,16,.55);border-bottom:1px solid var(--line)}
-.logo{font-weight:700;font-size:1.25rem;letter-spacing:.04em;text-decoration:none;color:var(--txt)}
-.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-nav .links{display:flex;gap:26px;align-items:center}
-nav .links a{color:var(--dim);text-decoration:none;font-size:.92rem;transition:color .2s}
-nav .links a:hover{color:var(--txt)}
-nav .links a.cta{color:#0a1403;background:var(--grad2);padding:9px 20px;border-radius:99px;font-weight:600}
-nav .links a.cta:hover{filter:brightness(1.12)}
-@media(max-width:760px){nav .links a:not(.cta){display:none}}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:14px clamp(16px,4vw,48px);
+  background:var(--bg2);border-bottom:4px solid var(--line)}
+.logo{font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--txt);
+  text-decoration:none;text-shadow:3px 3px 0 rgba(0,0,0,.5)}
+.logo b{color:var(--acid)}
+nav .links{display:flex;gap:20px;align-items:center}
+nav .links a{color:var(--dim);text-decoration:none;font-size:1.1rem}
+nav .links a:hover{color:var(--acid)}
+nav .links a.cta{font-family:'Press Start 2P',monospace;font-size:.6rem;color:#12102a;
+  background:var(--green);padding:10px 14px;border:3px solid var(--line);
+  box-shadow:3px 3px 0 rgba(0,0,0,.5)}
+nav .links a.cta:hover{background:var(--acid)}
+@media(max-width:820px){nav .links a:not(.cta){display:none}}
 
 /* hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:150px clamp(20px,6vw,72px) 80px;position:relative}
-.pill{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;color:var(--dim);
-  border:1px solid var(--line);border-radius:99px;padding:7px 16px;width:fit-content;
-  background:rgba(255,255,255,.03)}
-.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--acid);
-  box-shadow:0 0 10px var(--acid);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.4}}
-.hero h1{font-size:clamp(2.6rem,7.5vw,5.4rem);line-height:1.05;font-weight:700;
-  letter-spacing:-.02em;margin:26px 0 14px;max-width:1050px}
-.hero h1 .grad{background:var(--grad);background-size:200% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shift 6s linear infinite}
-@keyframes shift{to{background-position:200% 0}}
-.hero .typed{font-family:'JetBrains Mono',monospace;color:var(--acid);
-  font-size:clamp(.95rem,2.2vw,1.25rem);min-height:1.8em}
-.hero .typed .cursor{display:inline-block;width:9px;background:var(--acid);
-  animation:blink 1s steps(1) infinite}
+.hero{max-width:1100px;margin:0 auto;padding:96px clamp(16px,4vw,48px) 72px;
+  text-align:center}
+.blink{animation:blink 1.2s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero p.sub{color:var(--dim);max-width:640px;margin:22px 0 40px;font-size:1.08rem}
-.btns{display:flex;gap:16px;flex-wrap:wrap}
-.btn{padding:15px 32px;border-radius:14px;text-decoration:none;font-weight:600;
-  font-size:1rem;transition:transform .2s,box-shadow .2s,filter .2s;display:inline-block}
-.btn.primary{background:var(--grad2);color:#0a1403;box-shadow:0 0 30px rgba(163,230,53,.22)}
-.btn.primary:hover{transform:translateY(-3px);box-shadow:0 8px 44px rgba(74,222,128,.35)}
-.btn.ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.02)}
-.btn.ghost:hover{border-color:var(--green);transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(74,222,128,.18)}
+.hero h1{font-size:clamp(1.3rem,4.2vw,2.4rem);margin:26px 0 20px;
+  text-shadow:4px 4px 0 rgba(0,0,0,.55)}
+.hero h1 .g{color:var(--acid)}
+.hero h1 .p{color:var(--pink)}
+.hero .sub{color:var(--dim);max-width:620px;margin:0 auto 34px;font-size:1.35rem}
+.btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.btn{font-family:'Press Start 2P',monospace;font-size:.68rem;text-decoration:none;
+  padding:16px 22px;border:4px solid var(--line);
+  box-shadow:0 6px 0 rgba(0,0,0,.5);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.5)}
+.btn.primary{background:var(--green);color:#12102a}
+.btn.primary:hover{background:var(--acid)}
+.btn.ghost{background:var(--panel);color:var(--txt)}
+.btn.ghost:hover{background:var(--bg2);color:var(--cyan)}
+.hp{margin-top:54px;display:inline-flex;align-items:center;gap:12px;
+  font-size:1.2rem;color:var(--dim)}
+.hp .bar{display:inline-flex;gap:4px}
+.hp .pix{width:16px;height:16px;background:var(--pink);
+  box-shadow:2px 2px 0 rgba(0,0,0,.4)}
 
 /* ticker */
-.ticker-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  overflow:hidden;padding:13px 0;background:rgba(163,230,53,.03)}
-.ticker{display:flex;gap:64px;white-space:nowrap;width:max-content;
-  animation:scroll 28s linear infinite;font-family:'JetBrains Mono',monospace;
-  font-size:.85rem;color:var(--acid)}
+.ticker-wrap{border-top:4px solid var(--line);border-bottom:4px solid var(--line);
+  background:#0c0a20;overflow:hidden;padding:10px 0}
+.ticker{display:inline-flex;gap:56px;white-space:nowrap;width:max-content;
+  animation:scroll 26s linear infinite;font-size:1.25rem;color:var(--green);
+  text-shadow:2px 2px 0 rgba(0,0,0,.6)}
+.ticker b{color:var(--gold)}
 @keyframes scroll{to{transform:translateX(-50%)}}
-.ticker b{color:var(--txt);font-weight:600}
 
 /* sections */
-section{padding:110px clamp(20px,6vw,72px)}
-.sec-label{font-family:'JetBrains Mono',monospace;color:var(--acid);
-  font-size:.8rem;letter-spacing:.22em;text-transform:uppercase}
-h2{font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.02em;margin:14px 0 12px}
-.section-sub{color:var(--dim);max-width:640px;margin-bottom:52px}
+section{max-width:1100px;margin:0 auto;padding:88px clamp(16px,4vw,48px)}
+.kicker{color:var(--cyan);font-size:.72rem;letter-spacing:2px}
+h2{font-size:clamp(1rem,2.6vw,1.5rem);margin:16px 0 10px;
+  text-shadow:3px 3px 0 rgba(0,0,0,.5)}
+h2 .hl{color:var(--acid)}
+.section-sub{color:var(--dim);font-size:1.3rem;max-width:640px;margin-bottom:44px}
 
 /* experiments */
-.exps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.exp{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 28px;
-  position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
-.exp:hover{transform:translateY(-6px);border-color:rgba(163,230,53,.5);
-  box-shadow:0 18px 50px rgba(74,222,128,.10)}
-.exp .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
-  font-size:1.5rem;margin-bottom:18px;background:rgba(163,230,53,.07);
-  border:1px solid rgba(163,230,53,.25)}
-.exp h3{font-size:1.12rem;margin-bottom:8px}
-.exp p{color:var(--dim);font-size:.93rem}
-.status{display:inline-flex;align-items:center;gap:7px;margin-top:18px;
-  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;
-  padding:5px 12px;border-radius:99px;border:1px solid var(--line)}
-.status i{width:7px;height:7px;border-radius:50%;font-style:normal}
-.status.brewing{color:var(--acid);border-color:rgba(163,230,53,.4)}
-.status.brewing i{background:var(--acid);animation:pulse 1.6s infinite}
-.status.live{color:var(--green);border-color:rgba(74,222,128,.4)}
-.status.live i{background:var(--green)}
-.status.idea{color:var(--dim)}
-.status.idea i{background:var(--dim)}
+.exps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.exp{padding:26px 24px;transition:transform .12s}
+.exp:hover{transform:translate(-2px,-2px)}
+.exp .ico{font-size:2rem;margin-bottom:14px;display:block}
+.exp h3{font-size:.78rem;color:var(--cyan);margin-bottom:12px}
+.exp p{color:var(--dim);font-size:1.2rem;margin-bottom:18px}
+.status{display:inline-block;font-family:'Press Start 2P',monospace;font-size:.55rem;
+  padding:8px 12px;border:3px solid}
+.status.brewing{color:var(--gold);border-color:var(--gold);animation:blink 1.6s steps(1) infinite}
+.status.live{color:var(--green);border-color:var(--green)}
+.status.idea{color:var(--dim);border-color:var(--dim)}
 
 /* mission */
-.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.mission{border:1px dashed rgba(163,230,53,.35);border-radius:20px;padding:30px 28px;
-  background:rgba(163,230,53,.03);transition:transform .3s,border-color .3s}
-.mission:hover{transform:translateY(-5px);border-style:solid;border-color:rgba(163,230,53,.7)}
-.mission .ico{font-size:1.6rem}
-.mission h3{font-size:1.08rem;margin:12px 0 8px}
-.mission p{color:var(--dim);font-size:.92rem}
+.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.mission{padding:26px 24px}
+.mission .ico{font-size:2rem;margin-bottom:14px;display:block}
+.mission h3{font-size:.75rem;color:var(--pink);margin-bottom:12px}
+.mission p{color:var(--dim);font-size:1.2rem}
 
 /* band */
-.band{border:1px solid rgba(163,230,53,.3);border-radius:28px;
-  padding:clamp(44px,7vw,80px);text-align:center;
-  background:linear-gradient(145deg,rgba(163,230,53,.06),rgba(74,222,128,.05),rgba(167,139,250,.07))}
-.band p{color:var(--dim);max-width:520px;margin:14px auto 36px}
+.band{padding:clamp(32px,5vw,56px);text-align:center}
+.band h2{margin-top:12px}
+.band p{color:var(--dim);font-size:1.3rem;max-width:540px;margin:0 auto 32px}
 .band .btns{justify-content:center}
 
-footer{padding:56px clamp(20px,6vw,72px) 44px;display:flex;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:110px;
-  color:var(--dim);font-size:.88rem}
+footer{border-top:4px solid var(--line);background:var(--bg2);margin-top:60px;
+  padding:36px clamp(16px,4vw,48px);display:flex;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;color:var(--dim);font-size:1.15rem}
 footer a{color:var(--dim);text-decoration:none}
 footer a:hover{color:var(--acid)}
 footer .f-links{display:flex;gap:24px}
-
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
-@media(max-width:640px){section{padding:80px 24px}}
+.press-start{color:var(--gold);animation:blink 1.2s steps(1) infinite;
+  font-family:'Press Start 2P',monospace;font-size:.6rem;margin-top:18px}
 </style>
 </head>
 <body>
-<div class="backdrop"></div>
-<canvas id="stars"></canvas>
+<div class="stars"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
 
 <nav>
   <a class="logo" href="#">VIBECRAFT<b>LABS</b> 🧪</a>
@@ -152,84 +152,88 @@ footer .f-links{display:flex;gap:24px}
     <a href="#experiments">Experiments</a>
     <a href="#mission">Mission</a>
     <a href="#join">Join</a>
-    <a href="https://vibecraft-io.github.io" class="cta">VibeCraft IO ↗</a>
+    <a href="https://vibecraft-io.github.io" class="cta">▶ VibeCraft IO</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="pill"><span class="dot"></span> status: always brewing</div>
-  <h1>The experiment room of<br><span class="grad">VibeCraft.</span></h1>
-  <div class="typed"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
-  <p class="sub">VibeCraft Labs is where ideas ferment before they become products.
-     Prototypes, proofs of concept and open experiments — some will fail loudly,
-     a few will ship quietly through <a href="https://vibecraft-io.github.io"
-     style="color:var(--green)">VibeCraft IO</a>, our company.</p>
-  <div class="btns">
-    <a class="btn primary" href="#experiments">Peek at experiments ↓</a>
-    <a class="btn ghost" href="https://vibecraft-io.github.io">🏢 VibeCraft IO — the company</a>
+  <div class="px" style="font-size:.62rem;color:var(--green)">
+    ▌STATUS: ALWAYS BREWING<span class="blink">_</span>
   </div>
+  <h1><span class="p">EXPERIMENT</span> ROOM<br>OF <span class="g">VIBECRAFT</span></h1>
+  <p class="sub">Where ideas spawn at level 1 and grind XP until they become products.
+     Some run into ghosts. A few level up through VibeCraft IO.</p>
+  <div class="btns">
+    <a class="btn primary" href="#experiments">▶ START</a>
+    <a class="btn ghost" href="https://vibecraft-io.github.io">🏢 THE COMPANY</a>
+  </div>
+  <div class="hp">
+    ♥ HP <span class="bar"><span class="pix"></span><span class="pix"></span><span class="pix"></span><span class="pix"></span><span class="pix"></span></span>
+    · CURIOUS LV.99
+  </div>
+  <div class="press-start blink">▼ PRESS START TO SCROLL ▼</div>
 </header>
 
 <div class="ticker-wrap">
   <div class="ticker" id="ticker">
-    <span>SYS.BOOT … <b>OK</b></span>
-    <span>REACTOR <b>STABLE</b></span>
-    <span>EXPERIMENTS ACTIVE <b>07</b></span>
-    <span>CAFFEINE <b>97%</b></span>
-    <span>REALITY_MARGIN <b>OPTIONAL</b></span>
-    <span>MOOD <b>CURIOUS</b></span>
-    <span>VIBES <b>IMMACULATE</b></span>
+    <span>PLAYER 1: <b>YOU</b></span>
+    <span>EXPERIMENTS ACTIVE: <b>07</b></span>
+    <span>CAFFEINE: <b>97%</b></span>
+    <span>BUGS: <b>FEATURES</b></span>
+    <span>REALITY MARGIN: <b>OPTIONAL</b></span>
+    <span>HIGH SCORE: <b>9,999,999</b></span>
+    <span>VIBES: <b>IMMACULATE</b></span>
   </div>
 </div>
 
 <section id="experiments">
-  <div class="sec-label reveal">// experiments</div>
-  <h2 class="reveal">Currently in the tank.</h2>
-  <p class="section-sub reveal">Nothing here is a promise. Everything here is a question we're actively asking.</p>
+  <div class="kicker px">// EXPERIMENTS</div>
+  <h2>Currently in <span class="hl">the tank</span>.</h2>
+  <p class="section-sub">Nothing here is a promise. Everything here is a quest we accepted.</p>
   <div class="exps">
-    <div class="exp reveal"><div class="ico">🤖</div><h3>Agent Playground</h3>
+    <div class="exp pbox"><span class="ico">🤖</span><h3>AGENT PLAYGROUND</h3>
       <p>Sandbox where autonomous AI agents browse, click and reason. Watch them fumble, learn and occasionally achieve greatness.</p>
-      <span class="status brewing"><i></i>BREWING</span></div>
-    <div class="exp reveal"><div class="ico">🎮</div><h3>Neural Arcade</h3>
-      <p>Classic games rebuilt while neural nets play themselves — and quietly reinvent the strategy guide.</p>
-      <span class="status brewing"><i></i>BREWING</span></div>
-    <div class="exp reveal"><div class="ico">📡</div><h3>Homelab Mesh</h3>
-      <p>Self-hosted everything: home automation, observability and a Raspberry Pi cluster that hums in the corner.</p>
-      <span class="status live"><i></i>LIVE</span></div>
-    <div class="exp reveal"><div class="ico">📊</div><h3>Data Vibe-ualization</h3>
-      <p>Turning dull datasets into visuals people actually stare at. Charts with choreography.</p>
-      <span class="status idea"><i></i>IDEA</span></div>
-    <div class="exp reveal"><div class="ico">🦀</div><h3>Rust Micro-services</h3>
+      <span class="status brewing">BREWING</span></div>
+    <div class="exp pbox"><span class="ico">🎮</span><h3>NEURAL ARCADE</h3>
+      <p>Classic games rebuilt while neural nets play themselves — and quietly rewrite the strategy guide.</p>
+      <span class="status brewing">BREWING</span></div>
+    <div class="exp pbox"><span class="ico">📡</span><h3>HOMELAB MESH</h3>
+      <p>Self-hosted everything: home automation, observability and a Raspberry Pi cluster humming in the corner.</p>
+      <span class="status live">LIVE</span></div>
+    <div class="exp pbox"><span class="ico">📊</span><h3>DATA VIBE-UALIZATION</h3>
+      <p>Turning dull datasets into pixel charts people actually stare at. Graphs with choreography.</p>
+      <span class="status idea">IDEA</span></div>
+    <div class="exp pbox"><span class="ico">🦀</span><h3>RUST MICRO-SERVICES</h3>
       <p>Tiny, fast, unreasonably safe backend services. Because sometimes Go needs a rival.</p>
-      <span class="status brewing"><i></i>BREWING</span></div>
-    <div class="exp reveal"><div class="ico">🧬</div><h3>Generative UI</h3>
-      <p>Interfaces that assemble themselves from intent. Describe it, and the UI brews itself.</p>
-      <span class="status idea"><i></i>IDEA</span></div>
+      <span class="status brewing">BREWING</span></div>
+    <div class="exp pbox"><span class="ico">🧬</span><h3>GENERATIVE UI</h3>
+      <p>Interfaces that assemble themselves from intent. Describe it, and the screen builds itself.</p>
+      <span class="status idea">IDEA</span></div>
   </div>
 </section>
 
 <section id="mission">
-  <div class="sec-label reveal">// mission</div>
-  <h2 class="reveal">Brew first, productize later.</h2>
-  <p class="section-sub reveal">The lab exists so the company never stops learning.</p>
+  <div class="kicker px">// MISSION</div>
+  <h2>Brew first, <span class="hl">productize later</span>.</h2>
+  <p class="section-sub">The lab exists so the company never stops learning.</p>
   <div class="missions">
-    <div class="mission reveal"><div class="ico">🌱</div><h3>Explore fearlessly</h3>
-      <p>Experiments are cheap; assumptions are expensive. We test the weird ideas here, away from production.</p></div>
-    <div class="mission reveal"><div class="ico">🔗</div><h3>Open by default</h3>
-      <p>Code, findings and post-mortems get published. Failed experiments teach loudest — we share those too.</p></div>
-    <div class="mission reveal"><div class="ico">🚀</div><h3>Graduate the winners</h3>
-      <p>What survives the lab graduates to <a href="https://vibecraft-io.github.io" style="color:var(--green)">VibeCraft IO</a> and becomes real product work.</p></div>
+    <div class="mission pbox"><span class="ico">🌱</span><h3>EXPLORE FEARLESSLY</h3>
+      <p>Experiments are cheap; assumptions are expensive. We test the weird ideas here, far from production.</p></div>
+    <div class="mission pbox"><span class="ico">🔗</span><h3>OPEN BY DEFAULT</h3>
+      <p>Code, findings and post-mortems get published. Failed runs teach loudest — we share those too.</p></div>
+    <div class="mission pbox"><span class="ico">🚀</span><h3>LEVEL UP WINNERS</h3>
+      <p>What survives the lab graduates to VibeCraft IO and becomes real product work.</p></div>
   </div>
 </section>
 
 <section id="join">
-  <div class="band reveal">
-    <div class="sec-label">// join the lab</div>
-    <h2>Have a wild idea?</h2>
-    <p>Every experiment starts as a message like yours. Pitch it — worst case we learn something.</p>
+  <div class="band pbox">
+    <div class="kicker px">// JOIN THE LAB</div>
+    <h2>Have a <span class="hl">wild idea</span>?</h2>
+    <p>Every quest starts with a message. Pitch it — worst case we gain XP.</p>
     <div class="btns">
-      <a class="btn primary" href="mailto:lab@vibecraft.io">lab@vibecraft.io</a>
-      <a class="btn ghost" href="https://github.com/vibecraft-labs">GitHub ↗</a>
+      <a class="btn primary" href="https://github.com/vibecraft-labs">▶ GITHUB.COM/VIBECRAFT-LABS</a>
+      <a class="btn ghost" href="https://vibecraft-io.github.io">🏢 VIBECRAFT IO</a>
     </div>
   </div>
 </section>
@@ -243,47 +247,9 @@ footer .f-links{display:flex;gap:24px}
 </footer>
 
 <script>
-/* typing */
-const lines=[
-  "prototypes · proofs of concept · open experiments",
-  "where products are brewed before they exist",
-  "the experiment room of VibeCraft IO"];
-let li=0,ci=0,del=false;const t=document.getElementById('typed');
-(function tick(){
-  const s=lines[li];
-  t.textContent=s.slice(0,ci);
-  if(!del&&ci<s.length){ci++;setTimeout(tick,42);}
-  else if(!del){del=true;setTimeout(tick,2200);}
-  else if(ci>0){ci--;setTimeout(tick,18);}
-  else{del=false;li=(li+1)%lines.length;setTimeout(tick,350);}
-})();
-
-/* starfield */
-const c=document.getElementById('stars'),x=c.getContext('2d');let W,H,ps=[];
-function rs(){W=c.width=innerWidth;H=c.height=innerHeight;
-  ps=Array.from({length:Math.min(120,W/12)},()=>({
-    x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,
-    vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,
-    h:Math.random()<.6?80:(Math.random()<.5?262:150)}));}
-rs();addEventListener('resize',rs);
-(function draw(){
-  x.clearRect(0,0,W,H);
-  for(const p of ps){p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-    x.beginPath();x.arc(p.x,p.y,p.r,0,7);
-    x.fillStyle=`hsla(${p.h},85%,68%,.5)`;x.fill();}
-  requestAnimationFrame(draw);
-})();
-
-/* ticker: duplicate content for seamless loop */
+/* seamless ticker */
 const tk=document.getElementById('ticker');
 tk.innerHTML+=tk.innerHTML;
-
-/* reveal on scroll */
-const obs=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
-}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
